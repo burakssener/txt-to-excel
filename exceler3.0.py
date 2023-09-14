@@ -7,9 +7,12 @@ txt_files = glob.glob(f"{folder_path}/*.txt")
 
 def load_file(filename: str) -> list:
     result = []
-    with open(filename, encoding="utf-8") as infile:  # Specify UTF-8 encoding
+    file_texts = []  # Store text lines for each file
+    with open(filename, encoding="utf-8") as infile:
         for line in infile.read().splitlines():
-            result.append([os.path.basename(filename), line])  # Include the file name in each row
+            if line.strip():  # Check if the line is not empty
+                file_texts.append(line)  # Collect non-empty lines
+    result.append([os.path.basename(filename), "\n".join(file_texts)])  # Include the file name and combined text
     return result
 
 # Concatenate the data from all files into a single list
