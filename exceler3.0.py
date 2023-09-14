@@ -7,7 +7,7 @@ txt_files = glob.glob(f"{folder_path}/*.txt")
 
 def load_file(filename: str) -> list:
     result = []
-    with open(filename) as infile:
+    with open(filename, encoding="utf-8") as infile:  # Specify UTF-8 encoding
         for line in infile.read().splitlines():
             result.append([os.path.basename(filename), line])  # Include the file name in each row
     return result
